@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "399406767318",
+    "project_id": "solarsense-bc0e5",
+    "storage_bucket": "solarsense-bc0e5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:399406767318:android:ac3027e745e4af04507d77",
+        "android_client_info": {
+          "package_name": "com.example.solarsense"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhiu-LZmptANVQi8X6RiFH0t_-WPg3xvs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

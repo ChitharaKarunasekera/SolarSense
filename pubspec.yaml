@@ -1,0 +1,61 @@
+name: solarsense
+description: "A domain - specific LLM integrated Flutter app to guide users in investment planning and decision-making with regard to Solar Power Adoption in Sri Lanka"
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.1 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.6
+  google_fonts: ^6.2.1
+  get: ^4.6.6
+  liquid_swipe: ^3.1.0
+  smooth_page_indicator: ^1.1.0
+
+  ## -- OTP TEXT FIELD PACKAGE -- ##
+  flutter_otp_text_field: ^1.1.1
+  line_awesome_flutter: ^2.0.0
+  iconsax: ^0.0.8
+  firebase_core: ^2.27.1
+  firebase_auth: ^4.17.9
+  cloud_firestore: ^4.15.9
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/images/splash_screen_images/
+    - assets/images/on_boarding_images/
+    - assets/images/welcome_images/
+    - assets/images/icons/
+    - assets/images/forgot_password/
+    - assets/images/dashboard_images/
+    - assets/images/profile_screen/
+    - assets/images/email_verification/

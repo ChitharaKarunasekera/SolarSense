@@ -7,6 +7,7 @@ import 'package:solarsense/src/features/core/screens/dashboard/dashboard.dart';
 import 'package:solarsense/src/features/core/screens/profile/profile_screen.dart';
 
 import 'constants/colors.dart';
+import 'features/core/screens/my_plan/my_plan_screen.dart';
 import 'features/core/screens/playground/playground_screen.dart';
 
 class NavigationMenu extends StatelessWidget {
@@ -63,9 +64,7 @@ class NavigationController extends GetxController {
 
   final screens = [
     const Dashboard(),
-    Container(
-      color: Colors.deepPurple,
-    ),
+    const MyPlan(),
     const PlaygroundScreen(),
     const ProfileScreen()
   ];

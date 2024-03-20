@@ -121,6 +121,7 @@ class UpdateProfileScreen extends StatelessWidget {
                               child: ElevatedButton(
                                 onPressed: () async {
                                   final user = UserModel(
+                                      id: userdata.id,
                                       email: email.text.trim(),
                                       fullName: fullName.text.trim(),
                                       phoneNumber: phoneNumber.text.trim(),
@@ -129,7 +130,6 @@ class UpdateProfileScreen extends StatelessWidget {
                                       electricalAppliances: electricalAppliances.text.trim(),
                                       averageMonthlyBill: averageMonthlyBill.text.trim()
                                   );
-
                                   await controller.updateRecord(user);
                                 },
                                     //Get.to(() => const UpdateProfileScreen()),

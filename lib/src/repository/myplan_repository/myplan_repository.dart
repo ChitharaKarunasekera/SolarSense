@@ -32,9 +32,9 @@ class MyPlanRepository extends GetxController {
   }
 
   // fetch user data
-  Future<MyPlanModel> getMyPlan(String userId) async {
+  Future<MyPlanModel> getMyPlan(String email) async {
     final snapshot =
-    await _db.collection("myplan").where("userId", isEqualTo: userId).get();
+    await _db.collection("myplan").where("email", isEqualTo: email).get();
     final myPlan = snapshot.docs.map((e) => MyPlanModel.fromSnapshot(e)).single;
 
     return myPlan;

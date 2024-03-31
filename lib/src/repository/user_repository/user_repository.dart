@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:solarsense/src/features/core/models/myplan_model.dart';
 
 import '../../features/core/models/user_model.dart';
 
@@ -28,6 +29,35 @@ class UserRepository extends GetxController {
           backgroundColor: Colors.redAccent.withOpacity(0.1),
           colorText: Colors.red);
     });
+  }
+
+  Future<void> createGeneratedPlan(MyPlanModel myPlanModel) async {
+    await _db
+        .collection('myplan')
+        .add(myPlanModel.toJson())
+        .whenComplete(
+          () => Get.snackbar(
+        "Success",
+        "Your plan generated successfully!",
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green.withOpacity(0.1),
+        colorText: Colors.green,
+      ),
+    )
+        .catchError((error, stackTrace) {
+      Get.snackbar("Error", "Something went wrong. Try again",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent.withOpacity(0.1),
+          colorText: Colors.red);
+    });
+  }
+
+  Future<MyPlanModel> getGeneratedPlan(String email) async {
+    final snapshot =
+    await _db.collection("myplan").where("email", isEqualTo: email).get();
+    final myPlan = snapshot.docs.map((e) => MyPlanModel.fromSnapshot(e)).single;
+
+    return myPlan;
   }
 
   // fetch user data

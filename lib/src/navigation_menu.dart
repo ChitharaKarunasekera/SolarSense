@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:solarsense/src/features/core/screens/chatbot/chatbot_screen.dart';
 import 'package:solarsense/src/features/core/screens/dashboard/dashboard.dart';
 import 'package:solarsense/src/features/core/screens/profile/profile_screen.dart';
 
@@ -48,8 +49,8 @@ class NavigationMenu extends StatelessWidget {
               label: "Playground",
             ),
             NavigationDestination(
-              icon: Icon(Iconsax.user),
-              label: "Profile",
+              icon: Icon(Iconsax.messages_2),
+              label: "Chat",
             ),
           ],
         ),
@@ -66,6 +67,6 @@ class NavigationController extends GetxController {
     const Dashboard(),
     const MyPlan(),
     const PlaygroundScreen(),
-    const ProfileScreen()
+    const ChatBotScreen()
   ];
 }

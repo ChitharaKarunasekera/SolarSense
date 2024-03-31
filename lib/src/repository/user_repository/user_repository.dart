@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:solarsense/src/features/core/models/myplan_model.dart';
 
+import '../../features/core/models/products/panel_model.dart';
 import '../../features/core/models/user_model.dart';
 
 class UserRepository extends GetxController {
@@ -68,6 +69,7 @@ class UserRepository extends GetxController {
 
     return userData;
   }
+
 
 
   Future<void> updateUser(UserModel user) async {

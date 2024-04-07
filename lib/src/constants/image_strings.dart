@@ -34,3 +34,6 @@ const String profileImage1 = "assets/images/profile_screen/profile_image1.png";
 
 // Email Verification Images
 const String emailVerificationImage = "assets/images/email_verification/verify_email.png";
+
+// -- My Plant Screen Images --
+const String annualSavingsImage = "assets/images/my_plan_screen/annual_savings_1.jpg";

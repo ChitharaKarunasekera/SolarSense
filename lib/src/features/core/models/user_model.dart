@@ -8,7 +8,7 @@ class UserModel {
   final String email;
   final String fullName;
   final String phoneNumber;
-  final String location;
+  final String monthlyConsumption;
   final String electricalAppliances; //TODO: Change to List<String>
   final String averageMonthlyBill;
   final String password;
@@ -20,8 +20,8 @@ class UserModel {
     required this.email,
     required this.fullName,
     required this.phoneNumber,
+    required this.monthlyConsumption,
     required this.password,
-    required this.location,
     required this.electricalAppliances,
     required this.averageMonthlyBill,
   });
@@ -33,8 +33,8 @@ class UserModel {
       'email': email,
       'fullName': fullName,
       'phoneNumber': phoneNumber,
+      'monthlyConsumption': monthlyConsumption,
       'electricalAppliances': electricalAppliances,
-      'location': location,
       'averageMonthlyBill': averageMonthlyBill,
       'password': password,
     };
@@ -49,7 +49,7 @@ class UserModel {
       email: data["email"],
       fullName: data["fullName"],
       phoneNumber: data["phoneNumber"],
-      location: data["location"],
+      monthlyConsumption: data["monthlyConsumption"],
       electricalAppliances: data["electricalAppliances"],
       averageMonthlyBill: data["averageMonthlyBill"],
       password: data["password"],

@@ -40,6 +40,11 @@ dependencies:
   cloud_firestore: ^4.15.9
   google_generative_ai: ^0.2.2
 
+
+  percent_indicator: ^4.2.3
+  syncfusion_flutter_gauges: ^25.1.38
+  fl_chart: ^0.67.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -60,3 +65,4 @@ flutter:
     - assets/images/dashboard_images/
     - assets/images/profile_screen/
     - assets/images/email_verification/
+    - assets/images/my_plan_screen/

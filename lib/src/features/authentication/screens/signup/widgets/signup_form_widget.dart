@@ -67,8 +67,8 @@ class SignUpFormWidget extends StatelessWidget {
                         email: controller.email.text.trim(),
                         fullName: controller.fullName.text.trim(),
                         phoneNumber: controller.phoneNumber.text.trim(),
+                        monthlyConsumption: controller.monthlyConsumption.text.trim(),
                         password: controller.password.text.trim(),
-                        location: controller.location.text.trim(),
                         electricalAppliances: controller.electricalAppliances.text.trim(),
                         averageMonthlyBill: controller.averageMonthlyBill.text.trim()
                     );

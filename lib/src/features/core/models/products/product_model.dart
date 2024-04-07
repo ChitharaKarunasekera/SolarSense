@@ -3,25 +3,21 @@ import 'package:flutter/material.dart';
 import '../../../../constants/image_strings.dart';
 
 class ProductModel {
-  final String productName;
-  final String efficiency;
-  final String technology;
-  final String imageString;
-  final VoidCallback? onPressed;
+  final String productId;
+  //final VoidCallback? onPressed;
+
 
   ProductModel(
-      this.productName,
-      this.efficiency,
-      this.technology,
-      this.imageString,
-      this.onPressed,
+      this.productId,
+      //this.onPressed,
       );
 
+
   static List<ProductModel> list = [
-    ProductModel("JA Solar Panels", "21.3% Efficiency", "Monocrystalline Solar Panels", ajSolarPanelImage, null),
-    ProductModel("JA Solar Panels", "21.3% Efficiency", "Monocrystalline Solar Panels", ajSolarPanelImage, null),
-    ProductModel("JA Solar Panels", "21.3% Efficiency", "Monocrystalline Solar Panels", ajSolarPanelImage, null),
-    ProductModel("JA Solar Panels", "21.3% Efficiency", "Monocrystalline Solar Panels", ajSolarPanelImage, null),
-    ProductModel("JA Solar Panels", "21.3% Efficiency", "Monocrystalline Solar Panels", ajSolarPanelImage, null),
+    ProductModel("ID01"),
+    ProductModel("ID02"),
+    ProductModel("ID03"),
+    ProductModel("ID04"),
+    ProductModel("ID05"),
   ];
 }

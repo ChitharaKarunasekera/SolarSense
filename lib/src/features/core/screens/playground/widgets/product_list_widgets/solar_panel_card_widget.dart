@@ -5,18 +5,18 @@ import 'package:solarsense/src/features/core/models/products/battery_model.dart'
 import 'package:solarsense/src/features/core/models/products/inverter_model.dart';
 import 'package:solarsense/src/features/core/models/products/panel_model.dart';
 
-import '../../../../../constants/colors.dart';
-import '../../../../../constants/size.dart';
-import '../../../models/products/product_model.dart';
+import '../../../../../../constants/colors.dart';
+import '../../../../../../constants/size.dart';
+import '../../../../models/products/product_model.dart';
 
-class ProductCard extends StatelessWidget {
-  const ProductCard({
+class SolarPanelCard extends StatelessWidget {
+  const SolarPanelCard({
     super.key,
     required this.product,
     required this.txtTheme,
   });
 
-  final ProductModel product;
+  final PanelModel product;
   final TextTheme txtTheme;
 
   @override
@@ -39,11 +39,28 @@ class ProductCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Flexible(
-                      child: Text(
-                        product.productName,
-                        style: txtTheme.headline4,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "${product.brand} Panels",
+                            style: txtTheme.headline4,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Text(
+                            "Rs. ${product.cost}",
+                            style: txtTheme.titleMedium,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Text(
+                            "${product.warranty} Warranty",
+                            style: txtTheme.bodyText2,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
                       ),
                     ),
                     Flexible(
@@ -65,7 +82,7 @@ class ProductCard extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(product.efficiency,  style: txtTheme.headline4, overflow: TextOverflow.ellipsis,),
+                        Text(product.wattage,  style: txtTheme.headline4, overflow: TextOverflow.ellipsis,),
                         Text(product.technology, style: txtTheme.bodyText2, overflow: TextOverflow.ellipsis),
                       ],
                     )

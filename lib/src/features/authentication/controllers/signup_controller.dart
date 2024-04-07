@@ -18,7 +18,7 @@ class SignupController extends GetxController {
   final password = TextEditingController();
   final fullName = TextEditingController();
   final phoneNumber = TextEditingController();
-  final location = TextEditingController();
+  final monthlyConsumption = TextEditingController();
   final  electricalAppliances = TextEditingController(); // TODO: Change to List<String>
   final averageMonthlyBill = TextEditingController();
 

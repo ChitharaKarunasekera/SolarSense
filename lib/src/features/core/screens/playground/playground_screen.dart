@@ -1,17 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:solarsense/src/features/core/models/products/battery_model.dart';
-import 'package:solarsense/src/features/core/models/products/inverter_model.dart';
-import 'package:solarsense/src/features/core/models/products/panel_model.dart';
-import 'package:solarsense/src/features/core/screens/dashboard/widgets/appbar.dart';
-import 'package:solarsense/src/features/core/screens/playground/widgets/product_card_list.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:solarsense/src/features/core/screens/playground/widgets/analysis/analyse_statistics.dart';
+import 'package:solarsense/src/features/core/screens/playground/widgets/picked_compnents_section_widget.dart';
+import 'package:solarsense/src/features/core/screens/playground/widgets/product_list_widgets/inverter_card_list.dart';
+import 'package:solarsense/src/features/core/screens/playground/widgets/product_list_widgets/panel_card_list.dart';
+import 'package:solarsense/src/features/core/screens/playground/widgets/product_list_widgets/picked_equipment_card_list.dart';
 
-import '../../../../common_widgets/custom_shapes/circular_container.dart';
-import '../../../../common_widgets/custom_widgets/playground_hader_widget.dart';
-import '../../../../common_widgets/custom_widgets/solar_curved_edge_widget.dart';
-import '../../../../constants/colors.dart';
+import '../../controllers/myplan_controller.dart';
+import '../../models/myplan_model.dart';
+import 'widgets/header_widgets/playground_hader_widget.dart';
 import '../../../../constants/size.dart';
-import '../dashboard/widgets/top_selling.dart';
 
 class PlaygroundScreen extends StatelessWidget {
   const PlaygroundScreen({super.key});
@@ -20,6 +20,9 @@ class PlaygroundScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final txtTheme = Theme.of(context).textTheme;
+    final myPlanController = Get.put(MyPlanController());
+    final analyzeStatistics = Get.put(AnalyzeStatistics());
+    String productRecommendation = "";
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -33,7 +36,7 @@ class PlaygroundScreen extends StatelessWidget {
                   //DashboardAppbar()
                   Container(
                     width: 50,
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(0),
                     decoration: BoxDecoration(
                       color: Colors.transparent,
                         borderRadius: BorderRadius.circular(40),
@@ -46,21 +49,34 @@ class PlaygroundScreen extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(40),
-
               ),
               child: Container(
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    ///@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                    // Display the generated content
+                    Text("Picked Components", style: txtTheme.bodyLarge),
+                    PickedComponentsSection(txtTheme: txtTheme),
+                    const SizedBox(height: 5),
+                    const Divider(),
+                    /// Other available products
+
+
+                    const SizedBox(height: spaceBtwSections),
+
                     Text("Solar Panels", style: txtTheme.bodyLarge),
-                    ProductCardList(txtTheme: txtTheme),
+                    PanelCardList(txtTheme: txtTheme),
                     const SizedBox(height: spaceBtwSections),
                     Text("Inverters", style: txtTheme.bodyLarge),
-                    ProductCardList(txtTheme: txtTheme),
+                    InverterCardList(txtTheme: txtTheme),
                     const SizedBox(height: spaceBtwSections),
-                    Text("Batteries", style: txtTheme.bodyLarge),
-                    ProductCardList(txtTheme: txtTheme),
+                    // Text("Batteries", style: txtTheme.bodyLarge),
+                    // ProductCardList(txtTheme: txtTheme),
+
+
+
                   ],
                 )
               )

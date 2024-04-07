@@ -3,8 +3,21 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:solarsense/src/features/core/models/myplan_model.dart';
+import 'package:solarsense/src/features/core/models/user_model.dart';
+import 'package:solarsense/src/features/core/screens/my_plan/widgets/ProductionIndicator.dart';
+import 'package:solarsense/src/features/core/screens/my_plan/widgets/investment_dashboard/annual_savings_timeline_widget.dart';
+import 'package:solarsense/src/features/core/screens/my_plan/widgets/investment_dashboard/overview_card.dart';
+import 'package:solarsense/src/features/core/screens/my_plan/widgets/investment_dashboard/overview_card_widget1.dart';
+import 'package:solarsense/src/features/core/screens/my_plan/widgets/investment_dashboard/overview_card_widget2.dart';
+import 'package:solarsense/src/features/core/screens/my_plan/widgets/investment_dashboard/overview_card_widget3.dart';
+import 'package:solarsense/src/features/core/screens/my_plan/widgets/investment_dashboard/payback_progress_widget.dart';
+import 'package:solarsense/src/features/core/screens/my_plan/widgets/roi_guage_widget.dart';
+import 'package:solarsense/src/features/core/screens/my_plan/widgets/savings_doughnut_chart.dart';
 
+import '../../../../common_widgets/custom_shapes/circular_container.dart';
+import '../../../../constants/colors.dart';
 import '../../../../constants/size.dart';
 import '../../../../constants/text_strings.dart';
 import '../../../../repository/authentication_repository/authentication_repository.dart';
@@ -14,11 +27,13 @@ import '../dashboard/widgets/appbar.dart';
 
 import 'package:http/http.dart' as http;
 
+import '../playground/widgets/header_widgets/content_card_widget.dart';
+
 class MyPlan extends StatelessWidget {
   const MyPlan({super.key});
 
   // Function to fetch generated content from the API
-  Future<String> fetchGeneratedPlan() async {
+  Future<String> fetchGeneratedPlan(String monthlyConsumption) async {
     final url = Uri.parse(
         'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro:generateContent?key=AIzaSyAOvAI8BQUo8hH4lB792DmJb1ct4w3rJc4');
 
@@ -63,7 +78,7 @@ class MyPlan extends StatelessWidget {
                 "text":
                     "output: Inverter Capacity: 4 kW, Number of Solar Panels: 12, Panel Output Wattage: 350 W, Costing: 1200000"
               },
-              {"text": "input: 350 kWa"},
+              {"text": "input: $monthlyConsumption"},
               {"text": "output: "}
             ]
           }
@@ -108,7 +123,13 @@ class MyPlan extends StatelessWidget {
   }
 
   // Function to fetch generated content from the API
-  Future<String> fetchGeneratedAnalysis(String consumption, String inverter, String noOfPanels, String panelOutput, String costing, String monthlyExpense) async {
+  Future<String> fetchGeneratedAnalysis(
+      String consumption,
+      String inverter,
+      String noOfPanels,
+      String panelOutput,
+      String costing,
+      String monthlyExpense) async {
     final url = Uri.parse(
         'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro:generateContent?key=AIzaSyAOvAI8BQUo8hH4lB792DmJb1ct4w3rJc4');
 
@@ -120,38 +141,46 @@ class MyPlan extends StatelessWidget {
           {
             "parts": [
               {
-                "text": "Context:\nYou are a sophisticated AI tasked with calculating key financial figures for solar power installations. Your objective is to compute the Return on Investment (ROI) and payback period based on provided parameters. The focus is on delivering precise financial outputs to assist users in evaluating the economic feasibility of solar installations for various applications in Sri Lanka, without recommending specific system configurations.\n\nAssumptions for Calculation:\n•\tAverage daily sunlight hours in Sri Lanka: 5.5 hours\n•\tSystem efficiency (accounting for losses in conversion, cable transmission, etc.): 80%\n•\tAverage electricity rate in Sri Lanka: LKR 22 per kWh\n•\tSystem lifespan: 25 years\n\nCalculations to Perform:\n1.\tTotal System Output (in kW) = Panel Output Wattage * Number of Panels / 1000\n2.\tEffective System Capacity = Minimum of Total System Output and Inverter Capacity\n3.\tAnnual Electricity Production (in kWh) = Effective System Capacity * 5.5 hours * 365 days * System efficiency\n4.\tAnnual Savings = Annual Electricity Production * Average Electricity Rate\n5.\tPayback Period (in years) = Total Investment Cost / (Annual Savings * 12)\n6.\tROI over System Lifespan = ((Annual Savings * System Lifespan) - Total Investment Cost) / Total Investment Cost * 100%\n\n\nInput:\n•\tMonthly Average Power Consumption (kWh): Total average electricity used per month.\n•\tInverter Capacity (kW): Capacity of the inverter for converting DC to AC.\n•\tPanel Output Wattage (W): Power generation capacity per solar panel.\n•\tNumber of Solar Panels: Total count of panels in the setup.\n•\tInvestment Cost (LKR): Complete installation cost in Sri Lankan Rupees.\n•\tMonthly Average Electricity Expense (LKR): Average monthly electrical bill in LKR.\nOutput:\n•\tAnnual Electricity Production (kWh): Total yearly electricity generated by the solar panels.\n•\tAnnual Savings (LKR): Yearly financial savings achieved through solar power generation.\n•\tPayback Period (Years): Time needed to recover the initial investment from savings.\n•\tROI over System Lifespan (%): Total return on investment over the system's operational life, expressed as a percentage.\n\nDo NOT provide steps or explanations. Only provide the required outputs as shown in the example"
+                "text":
+                    "Context:\nYou are a sophisticated AI tasked with calculating key financial figures for solar power installations. Your objective is to compute the Return on Investment (ROI) and payback period based on provided parameters. The focus is on delivering precise financial outputs to assist users in evaluating the economic feasibility of solar installations for various applications in Sri Lanka, without recommending specific system configurations.\n\nAssumptions for Calculation:\n•\tAverage daily sunlight hours in Sri Lanka: 5.5 hours\n•\tSystem efficiency (accounting for losses in conversion, cable transmission, etc.): 80%\n•\tAverage electricity rate in Sri Lanka: LKR 22 per kWh\n•\tSystem lifespan: 25 years\n\nCalculations to Perform:\n1.\tTotal System Output (in kW) = Panel Output Wattage * Number of Panels / 1000\n2.\tEffective System Capacity = Minimum of Total System Output and Inverter Capacity\n3.\tAnnual Electricity Production (in kWh) = Effective System Capacity * 5.5 hours * 365 days * System efficiency\n4.\tAnnual Savings = Annual Electricity Production * Average Electricity Rate\n5.\tPayback Period (in years) = Total Investment Cost / (Annual Savings * 12)\n6.\tROI over System Lifespan = ((Annual Savings * System Lifespan) - Total Investment Cost) / Total Investment Cost * 100%\n\n\nInput:\n•\tMonthly Average Power Consumption (kWh): Total average electricity used per month.\n•\tInverter Capacity (kW): Capacity of the inverter for converting DC to AC.\n•\tPanel Output Wattage (W): Power generation capacity per solar panel.\n•\tNumber of Solar Panels: Total count of panels in the setup.\n•\tInvestment Cost (LKR): Complete installation cost in Sri Lankan Rupees.\n•\tMonthly Average Electricity Expense (LKR): Average monthly electrical bill in LKR.\nOutput:\n•\tAnnual Electricity Production (kWh): Total yearly electricity generated by the solar panels.\n•\tAnnual Savings (LKR): Yearly financial savings achieved through solar power generation.\n•\tPayback Period (Years): Time needed to recover the initial investment from savings.\n•\tROI over System Lifespan (%): Total return on investment over the system's operational life, expressed as a percentage.\n\nDo NOT provide steps or explanations. Only provide the required outputs as shown in the example"
               },
               {
-                "text": "input: Monthly Consumption: 600 kWa, Inverter Capacity: 5 kW, Number of Solar Panels: 24, Panel Output Wattage: 250 W, Investment cost: Rs. 2400000, Monthly electricity expense: Rs. 18000."
+                "text":
+                    "input: Monthly Consumption: 600 kWa, Inverter Capacity: 5 kW, Number of Solar Panels: 24, Panel Output Wattage: 250 W, Investment cost: Rs. 2400000, Monthly electricity expense: Rs. 18000."
               },
               {
-                "text": "output: Annual Electricity Production: 7200 kWh, Annual Savings: 216000, Payback Period: 11 years, ROI: 225%"
+                "text":
+                    "output: Annual Electricity Production: 7200 kWh, Annual Savings: 216000, Payback Period: 11 years, ROI: 225%"
               },
               {
-                "text": "input: Monthly Consumption: 300 kWh, Inverter Capacity: 2 kW, Number of Solar Panels: 8, Panel Output Wattage: 300 W, Costing: 800000, Monthly electricity expense: Rs. 10500"
+                "text":
+                    "input: Monthly Consumption: 300 kWh, Inverter Capacity: 2 kW, Number of Solar Panels: 8, Panel Output Wattage: 300 W, Costing: 800000, Monthly electricity expense: Rs. 10500"
               },
               {
-                "text": "output: Annual Electricity Production: 2880 kWh, Annual Savings: Rs. 99000, Payback Period: 8.08 years, ROI: 123.75%"
+                "text":
+                    "output: Annual Electricity Production: 2880 kWh, Annual Savings: Rs. 99000, Payback Period: 8.08 years, ROI: 123.75%"
               },
               {
-                "text": "input: Monthly Consumption: 500 kWh, Inverter Capacity: 4 kW, Number of Solar Panels: 12, Panel Output Wattage: 350 W, Costing: 1200000, Monthly electricity expense: Rs. 17500"
+                "text":
+                    "input: Monthly Consumption: 500 kWh, Inverter Capacity: 4 kW, Number of Solar Panels: 12, Panel Output Wattage: 350 W, Costing: 1200000, Monthly electricity expense: Rs. 17500"
               },
               {
-                "text": "output: Annual Electricity Production: 5040 kWh, Annual Savings: Rs. 157500, Payback Period: 7.62 years, ROI: 131.25%"
+                "text":
+                    "output: Annual Electricity Production: 5040 kWh, Annual Savings: Rs. 157500, Payback Period: 7.62 years, ROI: 131.25%"
               },
               {
-                "text": "input: Monthly Consumption: 600 kWh, Inverter Capacity: 5 kW, Number of Solar Panels: 14, Panel Output Wattage: 400 W, Costing: 1500000, Monthly electricity expense: Rs. 21000"
+                "text":
+                    "input: Monthly Consumption: 600 kWh, Inverter Capacity: 5 kW, Number of Solar Panels: 14, Panel Output Wattage: 400 W, Costing: 1500000, Monthly electricity expense: Rs. 21000"
               },
               {
-                "text": "output: Annual Electricity Production: 6720 kWh, Annual Savings: Rs. 189000, Payback Period: 7.94 years, ROI: 126%"
+                "text":
+                    "output: Annual Electricity Production: 6720 kWh, Annual Savings: Rs. 189000, Payback Period: 7.94 years, ROI: 126%"
               },
               {
-                "text": "input: Monthly Consumption: $consumption, Inverter Capacity: $inverter kW, Number of Solar Panels: $noOfPanels, Panel Output Wattage: $panelOutput, Costing: Rs. $costing, Monthly electricity expense: $monthlyExpense"
+                "text":
+                    "input: Monthly Consumption: $consumption, Inverter Capacity: $inverter kW, Number of Solar Panels: $noOfPanels, Panel Output Wattage: $panelOutput, Costing: Rs. $costing, Monthly electricity expense: $monthlyExpense"
               },
-              {
-                "text": "output: "
-              }
+              {"text": "output: "}
             ]
           }
         ],
@@ -187,7 +216,7 @@ class MyPlan extends StatelessWidget {
       final jsonResponse = jsonDecode(response.body);
       // Navigate through the response to extract the "text" field
       final String extractedText =
-      jsonResponse['candidates'][0]['content']['parts'][0]['text'];
+          jsonResponse['candidates'][0]['content']['parts'][0]['text'];
       return extractedText;
     } else {
       throw Exception('Failed to load generated content');
@@ -203,116 +232,286 @@ class MyPlan extends StatelessWidget {
 
     return Scaffold(
       appBar: const DashboardAppbar(),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(solarSenseDashboardTitle, style: txtTheme.bodyMedium),
-              Text(solarSenseDashboardHeading, style: txtTheme.displayMedium),
-              const SizedBox(height: solarSenseDashboardPadding),
+      body: Container(
+        color: SolarSenseColors.whiteColor,
+        padding: const EdgeInsets.all(0),
+        child: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Text(solarSenseDashboardTitle, style: txtTheme.bodyMedium),
+                // Text(solarSenseDashboardHeading, style: txtTheme.displayMedium),
+                // const SizedBox(height: solarSenseDashboardPadding),
 
-              // Display the generated content
+                // Display he generated content
+                FutureBuilder(
+                  future: myPlanController.getMyPlanData(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      if (snapshot.hasData) {
+                        final MyPlanModel myPlan = snapshot.data as MyPlanModel;
 
-              FutureBuilder(
-                future: myPlanController.getMyPlanData(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    if (snapshot.hasData) {
-                      final MyPlanModel myPlan = snapshot.data as MyPlanModel;
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Inverter Capacity: ${myPlan.inverterCapacity}", style: txtTheme.bodyMedium),
-                          Text("Panel Output Wattage: ${myPlan.panelOutputWattage}", style: txtTheme.bodyMedium),
-                          Text("Number of Panels: ${myPlan.noOfPanels} panels", style: txtTheme.bodyMedium),
-                          Text("Investment: Rs. ${myPlan.investment}", style: txtTheme.bodyMedium),
-                          Text("Annual Production: ${myPlan.annualProduction}", style: txtTheme.bodyMedium),
-                          Text("Annual Savings: ${myPlan.annualSavings}", style: txtTheme.bodyMedium),
-                          Text("Payback Period: ${myPlan.paybackPeriod}", style: txtTheme.bodyMedium),
-                          Text("ROI: ${myPlan.roi}", style: txtTheme.bodyMedium),
-                        ],
-                      );
-                    } else {
-                      //return const Text("No data found");
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text("Suggested Solar System",
+                                style: txtTheme.headline4?.apply(
+                                    color: SolarSenseColors.secondaryColor,
+                                    fontSizeFactor: 1.2)),
+                            const SizedBox(height: solarSenseDashboardPadding),
 
-                      // Generate Content Button
-                      return SizedBox(
-                        width: double.infinity,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: OutlinedButton(
-                            onPressed: () async {
-                              try {
-                                final email = _authRepo.firebaseUser.value?.email;
-                                final generatedPlan = await fetchGeneratedPlan();
+                            /// Solar System Summery
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                OverviewCard3(
+                                  title: "Inverter Capacity",
+                                  value: myPlan.inverterCapacity,
+                                  icon: Iconsax.setting_3,
+                                  //iconColor: Colors.blue,
+                                ),
+                                const SizedBox(width: 5),
+                                OverviewCard3(
+                                  title: "Inverter Capacity",
+                                  value: myPlan.panelOutputWattage,
+                                  icon: Iconsax.hashtag,
+                                  //iconColor: Colors.blue,
+                                ),
+                                const SizedBox(width: 5),
+                                OverviewCard3(
+                                  title: "Inverter Capacity",
+                                  value: myPlan.noOfPanels,
+                                  icon: Iconsax.slider_horizontal_1,
+                                  //iconColor: Colors.blue,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: solarSenseDashboardPadding),
+                            const Divider(),
 
-                                List<String> splitPlan = generatedPlan.split(',');
-                                print("Plan =  $splitPlan");
+                            /// Investment Overview
+                            const SizedBox(height: solarSenseDashboardPadding),
+                            Text("Investment Overview",
+                                style: txtTheme.headline4
+                                    ?.apply(
+                                    color: SolarSenseColors.secondaryColor,
+                                    fontSizeFactor: 1.2)),
+                            const SizedBox(height: solarSenseDashboardPadding),
 
-                                print("Split Data: $splitPlan");
-                                final String inverterCapacity = splitPlan[0].substring(splitPlan[0].indexOf(':') + 2);
-                                print("inverterCapacity = $inverterCapacity");
-                                final String noOfPanels = splitPlan[1].substring(splitPlan[1].indexOf(':') + 2);
-                                print("noOfPanels = $noOfPanels");
-                                final String panelOutput = splitPlan[2].substring(splitPlan[2].indexOf(':') + 2);
-                                print("panelOutput = $panelOutput");
-                                final String costing = splitPlan[3].substring(splitPlan[3].indexOf(':') + 2);
-                                print("costing = $costing");
+                            /// Annual Savings Card
+                            OverviewCard(
+                              title: "Annual Savings",
+                              value: "Rs. ${int.parse(
+                                myPlan.annualSavings.substring(
+                                    myPlan.annualSavings.indexOf('.') + 1),
+                              ).toStringAsFixed(0).replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match match) => '${match[1]},')}",
+                              icon: Iconsax.money_recive,
+                              iconColor: Colors.green,
+                              textColor: Colors.green,
+                            ),
 
-                                final generatedAnalysis = await fetchGeneratedAnalysis( "350", inverterCapacity, noOfPanels, panelOutput, costing, "18000");
+                            Row(
+                              children: [
+                                OverviewCard1(
+                                  title: "Annual Production",
+                                  value: myPlan.annualProduction,
+                                  icon: Icons.wb_sunny,
+                                  iconColor: Colors.orange.shade500,
+                                  textColor: Colors.orange.shade600,
+                                ),
+                                OverviewCard1(
+                                  title: "Payback Period",
+                                  value: myPlan.paybackPeriod,
+                                  icon: Iconsax.calendar_1,
+                                  iconColor: Colors.orange.shade500,
+                                  textColor: Colors.orange.shade600,
+                                ),
+                              ],
+                            ),
 
-                                List<String> splitAnalysis = generatedAnalysis.split(',');
-                                print("Analysis =  $splitAnalysis");
+                            OverviewCard2(
+                                totalInvestment:
+                                    "Rs. ${int.parse(myPlan.investment).toStringAsFixed(0).replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match match) => '${match[1]},')}"),
 
-                                final String annualProduction = splitAnalysis[0].substring(splitAnalysis[0].indexOf(':') + 2);
-                                print("annualProduction = $annualProduction");
-                                final String annualSavings = splitAnalysis[1].substring(splitAnalysis[1].indexOf(':') + 2);
-                                print("annualSavings = $annualSavings");
-                                final String paybackPeriod = splitAnalysis[2].substring(splitAnalysis[2].indexOf(':') + 2);
-                                print("paybackPeriod = $paybackPeriod");
-                                final String roi = splitAnalysis[3].substring(splitAnalysis[3].indexOf(':') + 2);
-                                print("roi = $roi");
+                            Card(
+                              elevation: 4.0,
+                              margin: const EdgeInsets.all(10.0),
+                              color: Colors.white,
+                              child: RIOGuage(
+                                roi: double.parse(
+                                    myPlan.roi.replaceAll('%', '').trim()),
+                              ),
+                            ),
+                            SizedBox(height: solarSenseDashboardPadding),
+                            //InvestmentOverviewChart(),
 
-                                final myPlan = MyPlanModel(
-                                    email: email,
-                                    inverterCapacity: inverterCapacity,
-                                    panelOutputWattage: panelOutput,
-                                    noOfPanels: noOfPanels,
-                                    investment: costing,
-                                    annualProduction: annualProduction,
-                                    annualSavings: annualSavings,
-                                    paybackPeriod: paybackPeriod,
-                                    roi: roi);
+                            Card(
+                              elevation: 4.0,
+                              margin: const EdgeInsets.all(10.0),
+                              color: Colors.white,
+                              child: Column(
+                                children: [
+                                  AnnualSavingsTimelineChart(
+                                    initialCost:
+                                        1200000, // Example initial cost of the solar system
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 20),
+                                    child: Text(
+                                      "Annual Savings Timeline",
+                                      style: txtTheme.bodyText1?.copyWith(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        );
+                      } else {
+                        //return const Text("No data found");
 
-                                MyPlanController.instance.createGeneratedPlan(myPlan);
+                        // Generate Content Button
+                        return SizedBox(
+                          width: double.infinity,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: FutureBuilder(
+                                future: profileController.getUserdata(),
+                                builder: (context, snapshot) {
+                                  return OutlinedButton(
+                                    onPressed: () async {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        if (snapshot.hasData) {
+                                          UserModel user =
+                                              snapshot.data as UserModel;
+                                          try {
+                                            //final email = _authRepo.firebaseUser.value?.email;
+                                            //Future<UserModel> user = profileController.getUserdata();
+                                            print(
+                                                "Monthly Consumption: ${user.monthlyConsumption}");
+                                            final generatedPlan =
+                                                await fetchGeneratedPlan(
+                                                    user.monthlyConsumption);
 
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text("Content generated successfully!")),
-                                );
-                              } catch (e) {
-                                print(e); // For debug purposes
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                      content: Text(
-                                          "Failed to generate or store content: $e")),
-                                );
-                              }
-                            },
-                            child: const Text("Generate Plan"),
+                                            List<String> splitPlan =
+                                                generatedPlan.split(',');
+                                            print("Plan =  $splitPlan");
+
+                                            print("Split Data: $splitPlan");
+                                            final String inverterCapacity =
+                                                splitPlan[0].substring(
+                                                    splitPlan[0].indexOf(':') +
+                                                        2);
+                                            print(
+                                                "inverterCapacity = $inverterCapacity");
+                                            final String noOfPanels =
+                                                splitPlan[1].substring(
+                                                    splitPlan[1].indexOf(':') +
+                                                        2);
+                                            print("noOfPanels = $noOfPanels");
+                                            final String panelOutput =
+                                                splitPlan[2].substring(
+                                                    splitPlan[2].indexOf(':') +
+                                                        2);
+                                            print("panelOutput = $panelOutput");
+                                            final String costing = splitPlan[3]
+                                                .substring(
+                                                    splitPlan[3].indexOf(':') +
+                                                        2);
+                                            print("costing = $costing");
+
+                                            final generatedAnalysis =
+                                                await fetchGeneratedAnalysis(
+                                                    user.monthlyConsumption,
+                                                    inverterCapacity,
+                                                    noOfPanels,
+                                                    panelOutput,
+                                                    costing,
+                                                    user.averageMonthlyBill);
+
+                                            List<String> splitAnalysis =
+                                                generatedAnalysis.split(',');
+                                            print("Analysis =  $splitAnalysis");
+
+                                            final String annualProduction =
+                                                splitAnalysis[0].substring(
+                                                    splitAnalysis[0]
+                                                            .indexOf(':') +
+                                                        2);
+                                            print(
+                                                "annualProduction = $annualProduction");
+                                            final String annualSavings =
+                                                splitAnalysis[1].substring(
+                                                    splitAnalysis[1]
+                                                            .indexOf(':') +
+                                                        2);
+                                            print(
+                                                "annualSavings = $annualSavings");
+                                            final String paybackPeriod =
+                                                splitAnalysis[2].substring(
+                                                    splitAnalysis[2]
+                                                            .indexOf(':') +
+                                                        2);
+                                            print(
+                                                "paybackPeriod = $paybackPeriod");
+                                            final String roi = splitAnalysis[3]
+                                                .substring(splitAnalysis[3]
+                                                        .indexOf(':') +
+                                                    2);
+                                            print("roi = $roi");
+
+                                            final myPlan = MyPlanModel(
+                                                email: user.email,
+                                                inverterCapacity:
+                                                    inverterCapacity,
+                                                panelOutputWattage: panelOutput,
+                                                noOfPanels: noOfPanels,
+                                                investment: costing,
+                                                annualProduction:
+                                                    annualProduction,
+                                                annualSavings: annualSavings,
+                                                paybackPeriod: paybackPeriod,
+                                                roi: roi);
+
+                                            MyPlanController.instance
+                                                .createGeneratedPlan(myPlan);
+
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                  content: Text(
+                                                      "Content generated successfully!")),
+                                            );
+                                          } catch (e) {
+                                            print(e); // For debug purposes
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                  content: Text(
+                                                      "Failed to generate or store content: $e")),
+                                            );
+                                          }
+                                        }
+                                      }
+                                    },
+                                    child: const Text("Generate Plan"),
+                                  );
+                                }),
                           ),
-                        ),
-                      );
+                        );
+                      }
+                    } else {
+                      return const CircularProgressIndicator();
                     }
-                  } else {
-                    return const CircularProgressIndicator();
-                  }
-                },
-              ),
-
-            ],
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

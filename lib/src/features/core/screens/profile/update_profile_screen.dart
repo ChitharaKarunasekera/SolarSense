@@ -40,7 +40,7 @@ class UpdateProfileScreen extends StatelessWidget {
                   final fullName = TextEditingController(text: userdata.fullName);
                   final password = TextEditingController(text: userdata.password);
                   final phoneNumber = TextEditingController(text: userdata.phoneNumber);
-                  final location = TextEditingController(text: userdata.location);
+                  final monthlyConsumption = TextEditingController(text: userdata.monthlyConsumption);
                   final electricalAppliances = TextEditingController(text: userdata.electricalAppliances);
                   final averageMonthlyBill = TextEditingController(text: userdata.averageMonthlyBill);
 
@@ -125,8 +125,8 @@ class UpdateProfileScreen extends StatelessWidget {
                                       email: email.text.trim(),
                                       fullName: fullName.text.trim(),
                                       phoneNumber: phoneNumber.text.trim(),
+                                      monthlyConsumption: monthlyConsumption.text.trim(),
                                       password: password.text.trim(),
-                                      location: location.text.trim(),
                                       electricalAppliances: electricalAppliances.text.trim(),
                                       averageMonthlyBill: averageMonthlyBill.text.trim()
                                   );

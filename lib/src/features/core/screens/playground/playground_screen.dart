@@ -32,8 +32,6 @@ class PlaygroundScreen extends StatelessWidget {
             PlaygroundHeader(
               child: Column(
                 children:[
-                  /// Error Here: Content Does not SHOW
-                  //DashboardAppbar()
                   Container(
                     width: 50,
                     padding: const EdgeInsets.all(0),

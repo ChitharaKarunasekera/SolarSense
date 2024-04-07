@@ -39,11 +39,57 @@ class SignUpFormWidget extends StatelessWidget {
                   prefixIcon: Icon(Icons.email_outlined)),
             ),
             const SizedBox(height: solarSenseFormHeight - 20),
-            TextFormField(
-              controller: controller.phoneNumber,
-              decoration: const InputDecoration(
-                  label: Text(solarSensePhoneNo),
-                  prefixIcon: Icon(Icons.numbers)),
+            // TextFormField(
+            //   controller: controller.monthlyConsumption,
+            //   decoration: const InputDecoration(
+            //       label: Text(solarSenseAvgConsumption),
+            //       prefixIcon: Icon(Icons.email_outlined)),
+            // ),
+            Row(
+              children: [
+                const Expanded(
+                  flex: 2,
+                  child: Text(
+                    solarSenseAvgConsumption,
+                    style: TextStyle(fontSize: 16.0),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Expanded(
+                  flex: 3, // Adjust the flex as needed to allocate space for the dropdown
+                  child:
+                  TextFormField(
+                    controller: controller.monthlyConsumption,
+                    decoration: const InputDecoration(
+                        label: Text("450 kWa"),
+                        prefixIcon: Icon(Icons.lightbulb_outline)),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: solarSenseFormHeight - 20),
+            Row(
+              children: [
+                const Expanded(
+                  flex: 2,
+                  child: Text(
+                    solarSenseAvgBill,
+                    style: TextStyle(fontSize: 16.0),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                SizedBox(width: 5.0), // Add space between the text and the textfield
+                Expanded(
+                  flex: 3, // Adjust the flex as needed to allocate space for the dropdown
+                  child:
+                  TextFormField(
+                    controller: controller.averageMonthlyBill,
+                    decoration: const InputDecoration(
+                        label: Text("14,000"),
+                        prefixIcon: Icon(Icons.money)),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: solarSenseFormHeight - 20),
             TextFormField(

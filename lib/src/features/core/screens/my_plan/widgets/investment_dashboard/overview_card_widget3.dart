@@ -12,7 +12,7 @@ class OverviewCard3 extends StatelessWidget {
     required this.title,
     required this.value,
     required this.icon,
-    this.iconColor = SolarSenseColors.secondaryColor, // Default icon color; can be customized
+    this.iconColor = SolarSenseColors.onBoardingPage1Color, // Default icon color; can be customized
   }) : super(key: key);
 
   @override
@@ -24,7 +24,7 @@ class OverviewCard3 extends StatelessWidget {
       child: Card(
         elevation: 4.0,
         margin: const EdgeInsets.all(8.0),
-        color: SolarSenseColors.whiteColor,//.withOpacity(0.6),
+        color: SolarSenseColors.primaryColor,//.withOpacity(0.6),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
           child: Column(
@@ -34,7 +34,7 @@ class OverviewCard3 extends StatelessWidget {
               Text(
                 value,
                 style: txtTheme.headline6?.copyWith(
-                  color: SolarSenseColors.secondaryColor,
+                  color: SolarSenseColors.onBoardingPage1Color,
                 ),
               ),
             ],

@@ -1,12 +1,16 @@
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:liquid_swipe/PageHelpers/LiquidController.dart';
+import 'package:solarsense/src/features/authentication/screens/welcome/welcome_screen.dart';
 
 import '../../../constants/colors.dart';
 import '../../../constants/image_strings.dart';
 import '../../../constants/text_strings.dart';
 import '../models/on_boarding_model.dart';
 import '../screens/on_boarding/on_boarding_page_widget.dart';
+import '../screens/splash_screen/splash_screen.dart';
 
 class OnBoardingController extends GetxController {
 
@@ -48,9 +52,14 @@ class OnBoardingController extends GetxController {
 
   onPageChangeCallback(int activePageIndex) => currentPage.value = activePageIndex;
 
-  skip() => controller.jumpToPage(page: 2);
+  skip() => Get.offAll(() => const WelcomeScreen());
+
+
   animateToNextSlide() {
     int nextPage = controller.currentPage + 1;
+    if(nextPage == 3 ) {
+      Get.offAll(() => const WelcomeScreen());
+    }
     controller.animateToPage(page: nextPage);
   }
 

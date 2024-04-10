@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:solarsense/src/features/authentication/screens/splash_screen/splash_screen.dart';
 import 'package:solarsense/src/navigation_menu.dart';
 
 import '../../features/authentication/screens/welcome/welcome_screen.dart';
@@ -26,7 +27,7 @@ class AuthenticationRepository extends GetxController {
     if (firebaseUser.value != null) {
       Get.offAll(() => const NavigationMenu());
     } else {
-      Get.offAll(() => const WelcomeScreen());
+      Get.offAll(() => SplashScreen());
     }
   }
 
@@ -35,7 +36,7 @@ class AuthenticationRepository extends GetxController {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
 
-      firebaseUser.value != null ? Get.offAll(() => const NavigationMenu()) : Get.to(() => const WelcomeScreen());
+      firebaseUser.value != null ? Get.offAll(() => const NavigationMenu()) : Get.to(() => SplashScreen());
 
     } on FirebaseAuthException catch (e) {
       final ex = SignUpWithEmailAndPasswordFailure.code(e.code);

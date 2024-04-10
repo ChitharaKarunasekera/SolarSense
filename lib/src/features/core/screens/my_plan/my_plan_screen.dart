@@ -18,6 +18,7 @@ import 'package:solarsense/src/features/core/screens/my_plan/widgets/savings_dou
 
 import '../../../../common_widgets/custom_shapes/circular_container.dart';
 import '../../../../constants/colors.dart';
+import '../../../../constants/image_strings.dart';
 import '../../../../constants/size.dart';
 import '../../../../constants/text_strings.dart';
 import '../../../../repository/authentication_repository/authentication_repository.dart';
@@ -267,21 +268,18 @@ class MyPlan extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 OverviewCard3(
-                                  title: "Inverter Capacity",
                                   value: myPlan.inverterCapacity,
                                   icon: Iconsax.setting_3,
                                   //iconColor: Colors.blue,
                                 ),
                                 const SizedBox(width: 5),
                                 OverviewCard3(
-                                  title: "Inverter Capacity",
                                   value: myPlan.panelOutputWattage,
                                   icon: Iconsax.hashtag,
                                   //iconColor: Colors.blue,
                                 ),
                                 const SizedBox(width: 5),
                                 OverviewCard3(
-                                  title: "Inverter Capacity",
                                   value: myPlan.noOfPanels,
                                   icon: Iconsax.slider_horizontal_1,
                                   //iconColor: Colors.blue,
@@ -294,8 +292,7 @@ class MyPlan extends StatelessWidget {
                             /// Investment Overview
                             const SizedBox(height: solarSenseDashboardPadding),
                             Text("Investment Overview",
-                                style: txtTheme.headline4
-                                    ?.apply(
+                                style: txtTheme.headline4?.apply(
                                     color: SolarSenseColors.secondaryColor,
                                     fontSizeFactor: 1.2)),
                             const SizedBox(height: solarSenseDashboardPadding),
@@ -307,7 +304,7 @@ class MyPlan extends StatelessWidget {
                                 myPlan.annualSavings.substring(
                                     myPlan.annualSavings.indexOf('.') + 1),
                               ).toStringAsFixed(0).replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match match) => '${match[1]},')}",
-                              icon: Iconsax.money_recive,
+                              icon: Iconsax.received1,
                               iconColor: Colors.green,
                               textColor: Colors.green,
                             ),
@@ -375,138 +372,172 @@ class MyPlan extends StatelessWidget {
                         //return const Text("No data found");
 
                         // Generate Content Button
-                        return SizedBox(
-                          width: double.infinity,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: FutureBuilder(
-                                future: profileController.getUserdata(),
-                                builder: (context, snapshot) {
-                                  return OutlinedButton(
-                                    onPressed: () async {
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.done) {
-                                        if (snapshot.hasData) {
-                                          UserModel user =
-                                              snapshot.data as UserModel;
-                                          try {
-                                            //final email = _authRepo.firebaseUser.value?.email;
-                                            //Future<UserModel> user = profileController.getUserdata();
-                                            print(
-                                                "Monthly Consumption: ${user.monthlyConsumption}");
-                                            final generatedPlan =
-                                                await fetchGeneratedPlan(
-                                                    user.monthlyConsumption);
+                        return SingleChildScrollView(
+                          child: FutureBuilder(
+                              future: profileController.getUserdata(),
+                              builder: (context, snapshot) {
+                                return Container(
+                                  padding: const EdgeInsets.all(solarSenseDefaultSize),
+                                  child: Column(
+                                    children: [
+                                      const Image(
+                                        image: AssetImage(myPlanImage),
+                                        //height: height * 0.6,
+                                      ),
+                                      const SizedBox(height: 100),
+                                      SizedBox(
+                                        width: 200,
+                                        child: ElevatedButton(
+                                          onPressed: () async {
+                                            if (snapshot.connectionState ==
+                                                ConnectionState.done) {
+                                              if (snapshot.hasData) {
+                                                UserModel user =
+                                                    snapshot.data as UserModel;
+                                                try {
+                                                  //final email = _authRepo.firebaseUser.value?.email;
+                                                  //Future<UserModel> user = profileController.getUserdata();
+                                                  print(
+                                                      "Monthly Consumption: ${user.monthlyConsumption}");
+                                                  final generatedPlan =
+                                                      await fetchGeneratedPlan(
+                                                          user.monthlyConsumption);
 
-                                            List<String> splitPlan =
-                                                generatedPlan.split(',');
-                                            print("Plan =  $splitPlan");
+                                                  List<String> splitPlan =
+                                                      generatedPlan.split(',');
+                                                  print("Plan =  $splitPlan");
 
-                                            print("Split Data: $splitPlan");
-                                            final String inverterCapacity =
-                                                splitPlan[0].substring(
-                                                    splitPlan[0].indexOf(':') +
-                                                        2);
-                                            print(
-                                                "inverterCapacity = $inverterCapacity");
-                                            final String noOfPanels =
-                                                splitPlan[1].substring(
-                                                    splitPlan[1].indexOf(':') +
-                                                        2);
-                                            print("noOfPanels = $noOfPanels");
-                                            final String panelOutput =
-                                                splitPlan[2].substring(
-                                                    splitPlan[2].indexOf(':') +
-                                                        2);
-                                            print("panelOutput = $panelOutput");
-                                            final String costing = splitPlan[3]
-                                                .substring(
-                                                    splitPlan[3].indexOf(':') +
-                                                        2);
-                                            print("costing = $costing");
+                                                  print("Split Data: $splitPlan");
+                                                  final String inverterCapacity =
+                                                      splitPlan[0].substring(
+                                                          splitPlan[0]
+                                                                  .indexOf(':') +
+                                                              2);
+                                                  print(
+                                                      "inverterCapacity = $inverterCapacity");
+                                                  final String noOfPanels =
+                                                      splitPlan[1].substring(
+                                                          splitPlan[1]
+                                                                  .indexOf(':') +
+                                                              2);
+                                                  print("noOfPanels = $noOfPanels");
+                                                  final String panelOutput =
+                                                      splitPlan[2].substring(
+                                                          splitPlan[2]
+                                                                  .indexOf(':') +
+                                                              2);
+                                                  print(
+                                                      "panelOutput = $panelOutput");
+                                                  final String costing =
+                                                      splitPlan[3].substring(
+                                                          splitPlan[3]
+                                                                  .indexOf(':') +
+                                                              2);
+                                                  print("costing = $costing");
 
-                                            final generatedAnalysis =
-                                                await fetchGeneratedAnalysis(
-                                                    user.monthlyConsumption,
-                                                    inverterCapacity,
-                                                    noOfPanels,
-                                                    panelOutput,
-                                                    costing,
-                                                    user.averageMonthlyBill);
+                                                  final generatedAnalysis =
+                                                      await fetchGeneratedAnalysis(
+                                                          user.monthlyConsumption,
+                                                          inverterCapacity,
+                                                          noOfPanels,
+                                                          panelOutput,
+                                                          costing,
+                                                          user.averageMonthlyBill);
 
-                                            List<String> splitAnalysis =
-                                                generatedAnalysis.split(',');
-                                            print("Analysis =  $splitAnalysis");
+                                                  List<String> splitAnalysis =
+                                                      generatedAnalysis.split(',');
+                                                  print(
+                                                      "Analysis =  $splitAnalysis");
 
-                                            final String annualProduction =
-                                                splitAnalysis[0].substring(
-                                                    splitAnalysis[0]
-                                                            .indexOf(':') +
-                                                        2);
-                                            print(
-                                                "annualProduction = $annualProduction");
-                                            final String annualSavings =
-                                                splitAnalysis[1].substring(
-                                                    splitAnalysis[1]
-                                                            .indexOf(':') +
-                                                        2);
-                                            print(
-                                                "annualSavings = $annualSavings");
-                                            final String paybackPeriod =
-                                                splitAnalysis[2].substring(
-                                                    splitAnalysis[2]
-                                                            .indexOf(':') +
-                                                        2);
-                                            print(
-                                                "paybackPeriod = $paybackPeriod");
-                                            final String roi = splitAnalysis[3]
-                                                .substring(splitAnalysis[3]
-                                                        .indexOf(':') +
-                                                    2);
-                                            print("roi = $roi");
+                                                  final String annualProduction =
+                                                      splitAnalysis[0].substring(
+                                                          splitAnalysis[0]
+                                                                  .indexOf(':') +
+                                                              2);
+                                                  print(
+                                                      "annualProduction = $annualProduction");
+                                                  final String annualSavings =
+                                                      splitAnalysis[1].substring(
+                                                          splitAnalysis[1]
+                                                                  .indexOf(':') +
+                                                              2);
+                                                  print(
+                                                      "annualSavings = $annualSavings");
+                                                  final String paybackPeriod =
+                                                      splitAnalysis[2].substring(
+                                                          splitAnalysis[2]
+                                                                  .indexOf(':') +
+                                                              2);
+                                                  print(
+                                                      "paybackPeriod = $paybackPeriod");
+                                                  final String roi =
+                                                      splitAnalysis[3].substring(
+                                                          splitAnalysis[3]
+                                                                  .indexOf(':') +
+                                                              2);
+                                                  print("roi = $roi");
 
-                                            final myPlan = MyPlanModel(
-                                                email: user.email,
-                                                inverterCapacity:
-                                                    inverterCapacity,
-                                                panelOutputWattage: panelOutput,
-                                                noOfPanels: noOfPanels,
-                                                investment: costing,
-                                                annualProduction:
-                                                    annualProduction,
-                                                annualSavings: annualSavings,
-                                                paybackPeriod: paybackPeriod,
-                                                roi: roi);
+                                                  final myPlan = MyPlanModel(
+                                                      email: user.email,
+                                                      inverterCapacity:
+                                                          inverterCapacity,
+                                                      panelOutputWattage:
+                                                          panelOutput,
+                                                      noOfPanels: noOfPanels,
+                                                      investment: costing,
+                                                      annualProduction:
+                                                          annualProduction,
+                                                      annualSavings: annualSavings,
+                                                      paybackPeriod: paybackPeriod,
+                                                      roi: roi);
 
-                                            MyPlanController.instance
-                                                .createGeneratedPlan(myPlan);
+                                                  MyPlanController.instance
+                                                      .createGeneratedPlan(myPlan);
 
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              const SnackBar(
-                                                  content: Text(
-                                                      "Content generated successfully!")),
-                                            );
-                                          } catch (e) {
-                                            print(e); // For debug purposes
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              SnackBar(
-                                                  content: Text(
-                                                      "Failed to generate or store content: $e")),
-                                            );
-                                          }
-                                        }
-                                      }
-                                    },
-                                    child: const Text("Generate Plan"),
-                                  );
-                                }),
-                          ),
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    const SnackBar(
+                                                        content: Text(
+                                                            "Content generated successfully!")),
+                                                  );
+                                                } catch (e) {
+                                                  print(e); // For debug purposes
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                        content: Text(
+                                                            "Failed to generate or store content: $e")),
+                                                  );
+                                                }
+                                              }
+                                            }
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                              backgroundColor:
+                                                  SolarSenseColors.primaryColor,
+                                              side: BorderSide.none,
+                                              shape: const StadiumBorder()),
+                                          child: const Text("Generate Plan",
+                                              style: TextStyle(
+                                                  color:
+                                                      SolarSenseColors.darkColor),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }),
                         );
                       }
                     } else {
-                      return const CircularProgressIndicator();
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          // Set the color of the CircularProgressIndicator
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                              SolarSenseColors.primaryColor),
+                        ),
+                      );
                     }
                   },
                 ),

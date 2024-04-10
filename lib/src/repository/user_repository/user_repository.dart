@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:solarsense/src/features/core/models/myplan_model.dart';
+import 'package:solarsense/src/features/core/models/plaground_stats_model.dart';
 
 import '../../features/core/models/products/panel_model.dart';
 import '../../features/core/models/user_model.dart';
@@ -51,6 +52,20 @@ class UserRepository extends GetxController {
           backgroundColor: Colors.redAccent.withOpacity(0.1),
           colorText: Colors.red);
     });
+  }
+
+  Future<void> createPlaygroundStats(PlaygroundStatsModel playgroundStatsModel) async {
+    await _db
+        .collection('playground_stats')
+        .add(playgroundStatsModel.toJson());
+  }
+
+  Future<PlaygroundStatsModel> getPlaygroundStats(String email) async {
+    final snapshot =
+    await _db.collection("playground_stats").where("email", isEqualTo: email).get();
+    final myPlan = snapshot.docs.map((e) => PlaygroundStatsModel.fromSnapshot(e)).single;
+
+    return myPlan;
   }
 
   Future<MyPlanModel> getGeneratedPlan(String email) async {

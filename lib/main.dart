@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:solarsense/src/features/authentication/screens/on_boarding/on_boarding_screen.dart';
 import 'package:solarsense/src/features/authentication/screens/splash_screen/splash_screen.dart';
 import 'package:solarsense/src/features/authentication/screens/welcome/welcome_screen.dart';
 import 'package:solarsense/src/navigation_menu.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
       theme: SolarSenseTheme.lightTheme,
       darkTheme: SolarSenseTheme.darkTheme,
       themeMode: ThemeMode.system,
-      home: const WelcomeScreen(),
+      home: const CircularProgressIndicator(),
     );
   }
 }

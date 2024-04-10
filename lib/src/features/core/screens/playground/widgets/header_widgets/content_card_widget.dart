@@ -93,7 +93,13 @@ class ContentCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     padding: const EdgeInsets.all(8),
-                    child: Text("Payback", style: txtTheme.titleSmall),
+                    child: Column(
+                      children: [
+                        Text("Payback", style: txtTheme.titleSmall),
+                        const SizedBox(height: solarSenseDashboardPadding),
+                        Text("10 Years", style: txtTheme.headlineMedium),
+                      ],
+                    ),
                   ),
                   const SizedBox(width: 5), // Optional: Adds space between the containers
                   Container(
@@ -104,7 +110,13 @@ class ContentCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     padding: const EdgeInsets.all(8),
-                    child: Text("Annual Savings", style: txtTheme.titleSmall),
+                    child: Column(
+                      children: [
+                        Text("Annual Savings", style: txtTheme.titleSmall),
+                        const SizedBox(height: solarSenseDashboardPadding),
+                        Text("Rs. 120,960", style: txtTheme.headlineMedium),
+                      ],
+                    ),
                   ),
                 ],
               ),

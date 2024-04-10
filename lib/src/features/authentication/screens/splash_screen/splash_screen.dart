@@ -26,7 +26,7 @@ class SplashScreen extends StatelessWidget {
           SolarFadeInAnimation(
             durationInMs: 1600,
             animatePosition: SolarAnimatePosition(
-              topAfter: 0, topBefore: -30, leftBefore: -30, leftAfter: 0,
+              topAfter: 10, topBefore: -30, leftBefore: -30, leftAfter: 10,
             ),
             child: const Image(image: AssetImage(solarSenseSplashIcon1)),
           ),
@@ -45,7 +45,7 @@ class SplashScreen extends StatelessWidget {
           ),
           SolarFadeInAnimation(
             durationInMs: 2400,
-            animatePosition: SolarAnimatePosition(bottomBefore: 0, bottomAfter: 100),
+            animatePosition: SolarAnimatePosition(bottomBefore: 0, bottomAfter: 150, leftBefore: 10, leftAfter: 20),
             child: const Image(image: AssetImage(solarSenseSplashImage1)),
           ),
           SolarFadeInAnimation(

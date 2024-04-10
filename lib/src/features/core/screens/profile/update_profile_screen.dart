@@ -94,11 +94,19 @@ class UpdateProfileScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: solarSenseFormHeight - 20),
                             TextFormField(
-                              controller: phoneNumber,
+                              controller: monthlyConsumption,
                               //initialValue: userdata.phoneNumber,
                               decoration: const InputDecoration(
-                                  label: Text(solarSensePhoneNo),
-                                  prefixIcon: Icon(LineAwesomeIcons.phone)),
+                                  label: Text(solarSenseAvgConsumption),
+                                  prefixIcon: Icon(Icons.lightbulb_outline)),
+                            ),
+                            const SizedBox(height: solarSenseFormHeight - 20),
+                            TextFormField(
+                              controller: averageMonthlyBill,
+                              //initialValue: userdata.phoneNumber,
+                              decoration: const InputDecoration(
+                                  label: Text(solarSenseAvgBill),
+                                  prefixIcon: Icon(Icons.money)),
                             ),
                             const SizedBox(height: solarSenseFormHeight - 20),
                             TextFormField(

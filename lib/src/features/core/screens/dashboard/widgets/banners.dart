@@ -1,18 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../../../../../constants/colors.dart';
 import '../../../../../constants/image_strings.dart';
 import '../../../../../constants/size.dart';
 import '../../../../../constants/text_strings.dart';
+import '../../profile/update_profile_screen.dart';
 
 class DashboardBanners extends StatelessWidget {
   const DashboardBanners({
     super.key,
+    required this.userConsumption,
+    required this.expense,
     required this.txtTheme,
   });
 
   final TextTheme txtTheme;
+  final String userConsumption;
+  final String expense;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +28,7 @@ class DashboardBanners extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: SolarSenseColors.cardBgColor,
+            color: SolarSenseColors.primaryColor.withOpacity(0.1),
             //For Dark Color
             //color: isDark ? tSecondaryColor : tCardBgColor,
           ),
@@ -50,10 +57,11 @@ class DashboardBanners extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 25),
-              Text(solarSenseDashboardBannerTitle1,
+              Text("$yourMonthlyConsumption is $userConsumption",
                   style: txtTheme.headline4,
-                  maxLines: 2,
+                  maxLines: 3,
                   overflow: TextOverflow.ellipsis),
+              const SizedBox(height: 10),
               Text(solarSenseDashboardBannerSubTitle,
                   style: txtTheme.bodyText2,
                   maxLines: 1,
@@ -71,7 +79,7 @@ class DashboardBanners extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 //For Dark Color
-                color: SolarSenseColors.cardBgColor,
+                color: SolarSenseColors.primaryColor.withOpacity(0.1),
               ),
               padding: const EdgeInsets.symmetric(
                   horizontal: 10, vertical: 20),
@@ -102,19 +110,20 @@ class DashboardBanners extends StatelessWidget {
                   Text(solarSenseDashboardBannerTitle2,
                       style: txtTheme.headline4,
                       overflow: TextOverflow.ellipsis),
+                  const SizedBox(height: 10),
                   Text(solarSenseDashboardBannerSubTitle,
                       style: txtTheme.bodyText2,
                       overflow: TextOverflow.ellipsis),
                 ],
               ),
             ),
-            const SizedBox(height: 5),
+            const SizedBox(height: 10),
             SizedBox(
               width: double.infinity,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () => Get.to(() => const UpdateProfileScreen()),
                     child: const Text(
                         solarSenseDashboardBannerButton)),
               ),

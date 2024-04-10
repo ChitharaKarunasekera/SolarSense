@@ -60,12 +60,12 @@ const String otpSubTitle = "Verification";
 const String otpMessage = "Enter the verification code sent at ";
 
 // -- Dashboard Text
-const String solarSenseDashboardTitle = "Hey, Chithara!";
+const String solarSenseDashboardTitle = "Hello, ";
 const String solarSenseDashboardHeading = "Explore SolarSense";
-const String solarSenseDashboardBannerTitle1 = "Tell me about you.";
+const String yourMonthlyConsumption = "Your monthly consumption is ";
 const String solarSenseDashboardBannerTitle2 = "Solar Power Equipment";
-const String solarSenseDashboardBannerSubTitle = "Plan here";
-const String solarSenseDashboardBannerButton = "Click Me";
+const String solarSenseDashboardBannerSubTitle = "Edit";
+const String solarSenseDashboardBannerButton = "Edit details";
 const String solarSenseDashboardTopSelling = "Top Selling";
 
 // -- Profile Screen Text

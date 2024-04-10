@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:solarsense/src/features/core/models/plaground_stats_model.dart';
 import 'package:solarsense/src/features/core/screens/playground/widgets/product_list_widgets/picked_equipment_card_list.dart';
 
 import '../../../../../constants/colors.dart';
@@ -69,21 +70,36 @@ class _PickedComponentsSectionState extends State<PickedComponentsSection> {
                           productRecommendation = innerSnapshot.data!;
                           print(
                               "Product Recommendation: $productRecommendation");
+
+
+                          String? email = myPlan.email;
+
                           return PickedEquipmentCardList(
+                              email: email,
                               recommendation: productRecommendation!,
                               txtTheme: widget.txtTheme);
                         } else if (innerSnapshot.hasError) {
                           return Text('Error: ${innerSnapshot.error}');
                         }
                       }
-                      return const CircularProgressIndicator();
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          // Set the color of the CircularProgressIndicator
+                          valueColor: AlwaysStoppedAnimation<Color>(SolarSenseColors.primaryColor),
+                        ),
+                      );
                     },
                   );
                 } else if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
                 }
               }
-              return const CircularProgressIndicator();
+              return const Center(
+                child: CircularProgressIndicator(
+                  // Set the color of the CircularProgressIndicator
+                  valueColor: AlwaysStoppedAnimation<Color>(SolarSenseColors.primaryColor),
+                ),
+              );
             },
           ),
       ],

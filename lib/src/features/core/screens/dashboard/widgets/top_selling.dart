@@ -34,7 +34,7 @@ class DashboardTopSelling extends StatelessWidget {
               child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: SolarSenseColors.cardBgColor),
+                      color: SolarSenseColors.primaryColor.withOpacity(0.1),),
                   padding: const EdgeInsets.all(10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

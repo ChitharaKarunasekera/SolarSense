@@ -62,7 +62,10 @@ class PanelCardList extends StatelessWidget {
         } else {
           // While the future is not complete, show a loading indicator.
           return const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              // Set the color of the CircularProgressIndicator
+              valueColor: AlwaysStoppedAnimation<Color>(SolarSenseColors.primaryColor),
+            ),
           );
         }
       }

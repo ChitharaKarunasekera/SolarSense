@@ -6,7 +6,6 @@ class SolarSenseColors {
   static const secondaryColor = Color(0xFF362201); //0xFF362201
   static const accentColor = Color(0xFFE3CD98);
 
-  static const cardBgColor = Color(0xFFF7F6F1);
   static const whiteColor = Color(0xFFFFFFFF);
   static const darkColor = Color(0xFF000000);
 

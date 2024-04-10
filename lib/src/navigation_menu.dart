@@ -42,7 +42,7 @@ class NavigationMenu extends StatelessWidget {
             ),
             NavigationDestination(
               icon: Icon(Iconsax.frame_3),
-              label: "Your Plan",
+              label: "My Plan",
             ),
             NavigationDestination(
               icon: Icon(Iconsax.shop),

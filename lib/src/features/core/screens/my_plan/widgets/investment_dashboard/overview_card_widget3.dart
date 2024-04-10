@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:solarsense/src/constants/colors.dart';
 
 class OverviewCard3 extends StatelessWidget {
-  final String title;
   final String value;
   final IconData icon;
   final Color iconColor;
 
   const OverviewCard3({
     Key? key,
-    required this.title,
     required this.value,
     required this.icon,
     this.iconColor = SolarSenseColors.onBoardingPage1Color, // Default icon color; can be customized

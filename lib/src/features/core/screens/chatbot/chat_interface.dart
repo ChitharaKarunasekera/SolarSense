@@ -121,7 +121,7 @@ class _ChatInterfaceState extends State<ChatInterface> {
         "contents": [
           {
             "parts": [
-              {"text": "You are a solar energy expert, and you are helping a customer with a solar panel installation. The customer asks you about the best location for the solar panels."}
+              {"text": "You are a solar energy expert in Sri Lanka, and you are helping a customer with a solar system adoption in Sri Lanka. Make the output shorter than 50 words."}
             ],
 
             "role": "user",
@@ -134,22 +134,22 @@ class _ChatInterfaceState extends State<ChatInterface> {
             "parts": [
               {
                 "text":
-                    "Hello there! I am SolarSense, and I am a here to assist you with solar power adoption. How may I help you today?"
+                "Hello there! I am SolarSense, and I am a here to assist you with solar power adoption. How may I help you today?"
               }
             ]
           },
           {
             "role": "user",
             "parts": [
-              {"text": userMessage}
+              {"text": "what is the best location for solar panels?"}
             ]
           }
         ],
         "generationConfig": {
-          "temperature": 0.4,
+          "temperature": 1,
           "topK": 1,
-          "topP": 0.9,
-          "maxOutputTokens": 64,
+          "topP": 1,
+          "maxOutputTokens": 512,
           "stopSequences": []
         },
         "safetySettings": []

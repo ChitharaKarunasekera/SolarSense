@@ -60,7 +60,7 @@ class Dashboard extends StatelessWidget {
                   }
                 }
                 // Display a loading indicator while waiting for the future to complete
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }),
         ),
       ),

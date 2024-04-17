@@ -8,6 +8,7 @@ import '../../../../../constants/image_strings.dart';
 import '../../../../../constants/size.dart';
 import '../../../../../constants/text_strings.dart';
 import '../../profile/update_profile_screen.dart';
+import 'infoCardwidget.dart';
 
 class DashboardBanners extends StatelessWidget {
   const DashboardBanners({
@@ -124,6 +125,7 @@ class DashboardBanners extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: OutlinedButton(
                     onPressed: () => Get.to(() => const UpdateProfileScreen()),
+                    //onPressed: () => infoCardWidget(context),
                     child: const Text(
                         solarSenseDashboardBannerButton)),
               ),

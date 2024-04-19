@@ -10,15 +10,18 @@ import '../../../../../../constants/colors.dart';
 import '../../../../../../constants/image_strings.dart';
 import '../../../../../../constants/size.dart';
 import '../../../../../../constants/text_strings.dart';
+import '../../../../models/myplan_model.dart';
 import '../../../../models/products/product_model.dart';
 
 class ContentCard extends StatelessWidget {
   const ContentCard({
     super.key,
     required this.txtTheme,
+    required this.myPlanModel,
   });
 
   final TextTheme txtTheme;
+  final MyPlanModel myPlanModel;
 
 
 
@@ -57,7 +60,10 @@ class ContentCard extends StatelessWidget {
                       children: [
                         Text("Total Investment", style: txtTheme.titleSmall),
                         const SizedBox(height: solarSenseDashboardPadding),
-                        Text("Rs. 1,200,000", style: txtTheme.headlineMedium),
+                        Text(
+                            "Rs. ${int.parse(myPlanModel.investment).toStringAsFixed(0).replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match match) => '${match[1]},')}",
+                            style: txtTheme.headlineMedium)
+                        ,
                       ],
                     ),
                   ),
@@ -74,7 +80,7 @@ class ContentCard extends StatelessWidget {
                       children: [
                         Text("System Size", style: txtTheme.titleSmall),
                         const SizedBox(height: solarSenseDashboardPadding),
-                        Text("8 kW", style: txtTheme.headlineMedium),
+                        Text(myPlanModel.inverterCapacity, style: txtTheme.headlineMedium),
                       ],
                     ),
                   ),
@@ -97,7 +103,7 @@ class ContentCard extends StatelessWidget {
                       children: [
                         Text("Payback", style: txtTheme.titleSmall),
                         const SizedBox(height: solarSenseDashboardPadding),
-                        Text("10 Years", style: txtTheme.headlineMedium),
+                        Text(myPlanModel.paybackPeriod, style: txtTheme.headlineMedium),
                       ],
                     ),
                   ),
@@ -114,7 +120,13 @@ class ContentCard extends StatelessWidget {
                       children: [
                         Text("Annual Savings", style: txtTheme.titleSmall),
                         const SizedBox(height: solarSenseDashboardPadding),
-                        Text("Rs. 120,960", style: txtTheme.headlineMedium),
+                        Text(
+                            "Rs. ${int.parse(
+                              myPlanModel.annualSavings.substring(
+                                  myPlanModel.annualSavings.indexOf('.') + 1),
+                            ).toStringAsFixed(0).replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match match) => '${match[1]},')}",
+                        style: txtTheme.headlineMedium
+                        ),
                       ],
                     ),
                   ),

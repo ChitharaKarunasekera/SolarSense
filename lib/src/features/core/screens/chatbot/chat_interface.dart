@@ -141,7 +141,7 @@ class _ChatInterfaceState extends State<ChatInterface> {
           {
             "role": "user",
             "parts": [
-              {"text": "what is the best location for solar panels?"}
+              {"text": "$userMessage Make sure to provide a short answer. Less than 50 words."}
             ]
           }
         ],

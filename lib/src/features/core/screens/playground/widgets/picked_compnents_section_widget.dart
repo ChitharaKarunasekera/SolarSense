@@ -25,10 +25,13 @@ class _PickedComponentsSectionState extends State<PickedComponentsSection> {
   bool _isButtonPressed = false;
   String? productRecommendation;
 
-  final myPlanController = Get.put(MyPlanController());
+
 
   @override
   Widget build(BuildContext context) {
+    final myPlanController = Get.put(MyPlanController());
+    final analyzeStatistics = Get.put(AnalyzeStatistics());
+
     return Column(
       //crossAxisAlignment: CrossAxisAlignment.start,
       children: [

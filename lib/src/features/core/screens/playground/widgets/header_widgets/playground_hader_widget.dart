@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:solarsense/src/features/core/models/myplan_model.dart';
 import 'package:solarsense/src/features/core/screens/dashboard/widgets/appbar.dart';
 import 'package:solarsense/src/features/core/screens/playground/widgets/header_widgets/solar_curved_edge_widget.dart';
 
@@ -12,9 +13,11 @@ class PlaygroundHeader extends StatelessWidget {
   const PlaygroundHeader({
     super.key,
     required this.child,
+    required this.myPlanModel,
   });
 
   final Widget child;
+  final MyPlanModel myPlanModel;
 
   @override
   Widget build(BuildContext context) {
@@ -28,25 +31,26 @@ class PlaygroundHeader extends StatelessWidget {
           height: 400,
           child: Stack(
             children: [
-
               Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 20), // Specify the top padding
+                    padding: const EdgeInsets.only(top: 20),
+                    // Specify the top padding
                     child: Container(
                         padding: const EdgeInsets.all(20),
                         child: Column(
                           //crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             //Text("Your Statistics", style: txtTheme.titleLarge),
-                            ContentCard(txtTheme: txtTheme)
+                            ContentCard(
+                              txtTheme: txtTheme,
+                              myPlanModel: myPlanModel,
+                            ),
                           ],
-                        )
-                    ),
-                  )
-              ),
+                        )),
+                  )),
               //Container(child: ContentCard(txtTheme: txtTheme)),
               //SolarSenseAppBar(),
 
@@ -55,14 +59,13 @@ class PlaygroundHeader extends StatelessWidget {
                   right: -200,
                   child: SolarCircularContainer(
                     backgroundColor:
-                    SolarSenseColors.whiteColor.withOpacity(0.2),
+                        SolarSenseColors.whiteColor.withOpacity(0.2),
                   )),
               Positioned(
                 top: 100,
                 right: -300,
                 child: SolarCircularContainer(
-                  backgroundColor:
-                  SolarSenseColors.whiteColor.withOpacity(0.1),
+                  backgroundColor: SolarSenseColors.whiteColor.withOpacity(0.1),
                 ),
               ),
             ],

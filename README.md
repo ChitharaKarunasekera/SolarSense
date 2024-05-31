@@ -1,16 +1,26 @@
-# solarsense
+# SolarSense
 
-A domain - specific LLM integrated Flutter app to guide users in investment planning and decision-making with regard to Solar Power Adoption in Sri Lanka
+## Description
+SolarSense_01 is a project aimed at enhancing investment-oriented product recommendations, research, and decision support for solar power adoption. Leveraging advanced data analysis and large language models (LLMs), the project provides insights and recommendations for investing in solar energy solutions, particularly tailored for the context of Sri Lanka.
 
-## Getting Started
+## Features
++ Investment Recommendations: Provides personalized product recommendations for solar power investments based on user preferences and market data.
++ Data Analysis: Utilizes advanced data analysis techniques to evaluate solar power potential, performance metrics, and financial viability.
++ Decision Support: Offers robust decision support tools to help users make informed choices about solar energy investments, including ROI calculations and payback period analysis.
++ User-Friendly Interface: Designed with a user-friendly interface for easy navigation and interaction, featuring graphical representations of data and recommendations.
 
-This project is a starting point for a Flutter application.
+## Architecture
+The architecture of the SolarSense Engine comprises four main layers:
 
-A few resources to get you started if this is your first Flutter project:
+1. Data Processing and Pre-processing Layer: Collects and enhances domain-specific data.
+2. LLM Training Layer: Utilizes complex Transformer-based models for fine-tuning with domain-specific data.
+3. Recommendation Engine: Provides tailored product recommendations using user interactions and market data.
+4. Decision Support Layer: Uses insights from the LLM to provide graphical charts for decision-making assistance.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Key Components
+Data Tier: Stores user profiles, product specifications, market data, pricing information, and historical recommendations.
+Logic Tier: Handles data integration, API communication, and LLM prompting methodologies to generate recommendations.
+Presentation Tier: Manages user interactions and displays outputs, including recommendations and analyses, using a graphical dashboard.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+

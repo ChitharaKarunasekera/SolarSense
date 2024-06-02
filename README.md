@@ -1,7 +1,7 @@
 # SolarSense
 
 ## Description
-SolarSense_01 is a project aimed at enhancing investment-oriented product recommendations, research, and decision support for solar power adoption. Leveraging advanced data analysis and large language models (LLMs), the project provides insights and recommendations for investing in solar energy solutions, particularly tailored for the context of Sri Lanka.
+SolarSense is a project aimed at enhancing investment-oriented product recommendations, research, and decision support for solar power adoption. Leveraging advanced data analysis and large language models (LLMs), the project provides insights and recommendations for investing in solar energy solutions, particularly tailored for the context of Sri Lanka.
 
 ## Features
 + Investment Recommendations: Provides personalized product recommendations for solar power investments based on user preferences and market data.
